@@ -41,8 +41,31 @@ class TestLexer < Minitest::Test
         ], @lexer.lex("{ \"alive\": \"28\" }")
     end
 
-    # def test_nested_objects
-    #     assert_equal ["[", "{", "object1"], 
-    #     @lexer.lex("[{\"object1\":\"test\"},{\"object2\":{\"test\":\"test\"}},{\"object3\":\"test\"}]")
-    # end
+    def test_nested_objects
+        assert_equal [
+            Token.new("[", TokenType::BRACKET_OPEN),
+            Token.new("{", TokenType::CURLY_BRACKET_OPEN),
+            Token.new("object1", TokenType::STRING),
+            Token.new(":", TokenType::COLON),
+            Token.new("test", TokenType::STRING),
+            Token.new("}", TokenType::CURLY_BRACKET_CLOSE),
+            Token.new(",", TokenType::COMMA),
+            Token.new("{", TokenType::CURLY_BRACKET_OPEN),
+            Token.new("object2", TokenType::STRING),
+            Token.new(":", TokenType::COLON),
+            Token.new("{", TokenType::CURLY_BRACKET_OPEN),
+            Token.new("test", TokenType::STRING),
+            Token.new(":", TokenType::COLON),
+            Token.new("test", TokenType::STRING),
+            Token.new("}", TokenType::CURLY_BRACKET_CLOSE),
+            Token.new("}", TokenType::CURLY_BRACKET_CLOSE),
+            Token.new(",", TokenType::COMMA),
+            Token.new("{", TokenType::CURLY_BRACKET_OPEN),
+            Token.new("object3", TokenType::STRING),
+            Token.new(":", TokenType::COLON),
+            Token.new("test", TokenType::STRING),
+            Token.new("}", TokenType::CURLY_BRACKET_CLOSE),
+            Token.new("]", TokenType::BRACKET_CLOSE)
+        ], @lexer.lex("[{\"object1\":\"test\"},{\"object2\":{\"test\":\"test\"}},{\"object3\":\"test\"}]")
+    end
 end

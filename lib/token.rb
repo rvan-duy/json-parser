@@ -10,8 +10,11 @@ end
 module TokenType
     CURLY_BRACKET_OPEN = 0,
     CURLY_BRACKET_CLOSE = 1,
-    STRING = 2,
-    NUMBER = 3,
-    BOOLEAN = 4,
-    COLON = 5
+    BRACKET_OPEN = 2,
+    BRACKET_CLOSE = 3,
+    STRING = 4,
+    NUMBER = 5,
+    BOOLEAN = 6,
+    COLON = 7,
+    COMMA = 8
 end
